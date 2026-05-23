@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Output files
+output/
+input/
+
+# Environment variables
+.env
