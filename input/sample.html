@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Annual Report 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7ff;
+      padding: 40px;
+      color: #1a1a2e;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+    }
+
+    /* ── Header Banner ── */
+    .header {
+      background: linear-gradient(135deg, #1a1a6e 0%, #4361ee 60%, #7209b7 100%);
+      padding: 48px 48px 40px;
+      color: white;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .company-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+    .report-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .header-title {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .header-sub {
+      font-size: 16px;
+      opacity: 0.75;
+    }
+
+    /* ── KPI Strip ── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #f8f9ff;
+      border-bottom: 1px solid #e8eeff;
+    }
+    .kpi {
+      padding: 24px 20px;
+      text-align: center;
+      border-right: 1px solid #e8eeff;
+    }
+    .kpi:last-child { border-right: none; }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #4361ee;
+      margin-bottom: 4px;
+    }
+    .kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      font-weight: 600;
+    }
+    .kpi-change {
+      font-size: 12px;
+      color: #2ecc71;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* ── Body ── */
+    .body { padding: 40px 48px; }
+
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    /* ── Revenue Chart (CSS bars) ── */
+    .chart-section { margin-bottom: 40px; }
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .chart-title { font-size: 18px; font-weight: 700; }
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: #666;
+    }
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      height: 160px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #e8eeff;
+      position: relative;
+    }
+    .bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .bars { display: flex; gap: 4px; align-items: flex-end; width: 100%; justify-content: center; }
+    .bar {
+      width: 20px;
+      border-radius: 4px 4px 0 0;
+      transition: all 0.3s;
+    }
+    .bar.revenue { background: #4361ee; }
+    .bar.profit  { background: #7209b7; opacity: 0.7; }
+    .bar-label {
+      font-size: 11px;
+      color: #999;
+      margin-top: 8px;
+      position: absolute;
+      bottom: 8px;
+    }
+
+    .bar-group:nth-child(1) .bar-label { left: 6%; }
+    .bar-group:nth-child(2) .bar-label { left: 22%; }
+    .bar-group:nth-child(3) .bar-label { left: 38%; }
+    .bar-group:nth-child(4) .bar-label { left: 54%; }
+    .bar-group:nth-child(5) .bar-label { left: 70%; }
+    .bar-group:nth-child(6) .bar-label { left: 86%; }
+
+    /* ── Two column ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    /* ── Department Table ── */
+    .table-card {
+      background: #f8f9ff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .table-card-header {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      border-bottom: 1px solid #e8eeff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      padding: 10px 16px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
+      background: #f0f3ff;
+    }
+    td {
+      padding: 10px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid #e8eeff;
+    }
+    tr:last-child td { border-bottom: none; }
+    .status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .status.green { background: #e8fff4; color: #2ecc71; }
+    .status.blue  { background: #e8eeff; color: #4361ee; }
+    .status.purple{ background: #f3e8ff; color: #7209b7; }
+
+    /* ── Goals Card ── */
+    .goals-card {
+      background: linear-gradient(135deg, #1a1a6e, #4361ee);
+      border-radius: 12px;
+      padding: 24px;
+      color: white;
+    }
+    .goals-card h3 { font-size: 15px; margin-bottom: 20px; opacity: 0.9; }
+    .goal-item { margin-bottom: 16px; }
+    .goal-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .goal-bar-bg {
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+      height: 6px;
+    }
+    .goal-bar-fill {
+      height: 6px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.9);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: #1a1a2e;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="company-name">Nexora Inc.</div>
+        <div class="report-badge">Annual Report 2025</div>
+      </div>
+      <div class="header-title">Performance<br>Overview</div>
+      <div class="header-sub">Fiscal Year January – December 2025</div>
+    </div>
+
+    <!-- KPI Strip -->
+    <div class="kpi-strip">
+      <div class="kpi">
+        <div class="kpi-value">$48.2M</div>
+        <div class="kpi-label">Total Revenue</div>
+        <div class="kpi-change">▲ 23% YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">$12.7M</div>
+        <div class="kpi-label">Net Profit</div>
+        <div class="kpi-change">▲ 18% YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">1,840</div>
+        <div class="kpi-label">Employees</div>
+        <div class="kpi-change">▲ 210 hired</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">94.2%</div>
+        <div class="kpi-label">Client Retention</div>
+        <div class="kpi-change">▲ 3.1% YoY</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="body">
+
+      <!-- Bar Chart -->
+      <div class="chart-section">
+        <div class="chart-header">
+          <div class="chart-title">Revenue vs Profit — 2025</div>
+          <div class="chart-legend">
+            <span><span class="legend-dot" style="background:#4361ee"></span>Revenue</span>
+            <span><span class="legend-dot" style="background:#7209b7"></span>Profit</span>
+          </div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-group">
+            <div class="bars">
+              <div class="bar revenue" style="height:80px"></div>
+              <div class="bar profit"  style="height:30px"></div>
+            </div>
+            <span class="bar-label">Q1</span>
+          </div>
+          <div class="bar-group">
+            <div class="bars">
+              <div class="bar revenue" style="height:95px"></div>
+              <div class="bar profit"  style="height:38px"></div>
+            </div>
+            <span class="bar-label">Q2</span>
+          </div>
+          <div class="bar-group">
+            <div class="bars">
+              <div class="bar revenue" style="height:110px"></div>
+              <div class="bar profit"  style="height:45px"></div>
+            </div>
+            <span class="bar-label">Q3</span>
+          </div>
+          <div class="bar-group">
+            <div class="bars">
+              <div class="bar revenue" style="height:140px"></div>
+              <div class="bar profit"  style="height:56px"></div>
+            </div>
+            <span class="bar-label">Q4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two Column -->
+      <div class="two-col">
+
+        <!-- Department Table -->
+        <div class="table-card">
+          <div class="table-card-header">Department Performance</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Team</th>
+                <th>Target</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Engineering</td>
+                <td>$18.4M</td>
+                <td><span class="status green">On Track</span></td>
+              </tr>
+              <tr>
+                <td>Sales</td>
+                <td>$14.2M</td>
+                <td><span class="status green">On Track</span></td>
+              </tr>
+              <tr>
+                <td>Marketing</td>
+                <td>$8.6M</td>
+                <td><span class="status blue">Review</span></td>
+              </tr>
+              <tr>
+                <td>Operations</td>
+                <td>$7.0M</td>
+                <td><span class="status purple">Scaling</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Goals Card -->
+        <div class="goals-card">
+          <h3>2026 Strategic Goals</h3>
+          <div class="goal-item">
+            <div class="goal-label"><span>Market Expansion</span><span>72%</span></div>
+            <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:72%"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-label"><span>Product Launches</span><span>58%</span></div>
+            <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:58%"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-label"><span>Hiring Plan</span><span>85%</span></div>
+            <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-label"><span>R&D Investment</span><span>40%</span></div>
+            <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:40%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-logo">Nexora Inc.</div>
+      <div>Confidential · Annual Report 2025 · All figures in USD</div>
+      <div>Page 1 of 1</div>
+    </div>
+
+  </div>
+</body>
+</html>

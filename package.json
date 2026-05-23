@@ -1,0 +1,13 @@
+{
+  "name": "html-to-pdf",
+  "version": "1.0.0",
+  "description": "Convert HTML files to PDF using Playwright",
+  "main": "convert.js",
+  "scripts": {
+    "convert": "node convert.js",
+    "install-browser": "npx playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.44.0"
+  }
+}
